@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .registration-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        .registration-container h1 {
+            color: #333333;
+        }
+
+        .registration-form {
+            margin-top: 20px;
+        }
+
+        .registration-form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .registration-form input[type="submit"] {
+            background-color: #4caf50;
+            color: #ffffff;
+            cursor: pointer;
+        }
+
+        .registration-form input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="registration-container">
+        <h1>Registration</h1>
+        <form class="registration-form" action="register" method="post">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Create your username" required><br>
+            <input type="text" name="firstname" placeholder="Enter your first name" required><br>
+            <input type="text" name="last name" placeholder="Enter your last name" required><br>
+            <input type="email" name="email address" placeholder="Enter your email address" required><br>
+            <input type="password" name="password" placeholder="Enter new password" required><br>
+            <input type="password" name="confirm password" placeholder="Confirm your password" required><br>
+            <input type="submit" value="Register">
+        </form>
+        {% for msg in messages %}
+            <p style="color: red">{{ msg }}</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
