@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+    <header>
+        <h1 class="header_home">School Store</h1>
+    </header>
+
+    <section>
+        <form action="{% url 'schoolapp:login' %}" method="post">
+            {% csrf_token %}
+            <label for="username">Username or Email:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Login</button>
+        </form>
+        <a href="/registration">Register</a>
+        {% for msg in messages %}
+            <p style="color: red">{{ msg }}</p>
+        {% endfor %}
+    </section>
+
+    <footer>
+        <p>&copy; 2024 School Store</p>
+    </footer>
+
+
+
+{% endblock %}
