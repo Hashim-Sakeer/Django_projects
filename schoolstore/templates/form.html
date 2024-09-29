@@ -1,0 +1,140 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Form</title>
+  <link rel="stylesheet" href="{% static 'path/to/bootstrap.min.css' %}">
+  <!-- Add your custom CSS or include it here -->
+  <style>
+    /* Add your custom CSS styles here */
+    .section-header {
+      margin-top: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    /* Add more styles as needed */
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Student Form</h2>
+  <form method="post" action="{% url 'schoolapp:success' %}" class="form">
+ {% csrf_token %}
+    <!-- Personal Information Section -->
+    <div class="section-header">
+      <h3>Personal Information</h3>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        {{ form.name.label_tag }}
+        {{ form.name }}
+      </div>
+      <div class="form-group col-md-6">
+        {{ form.dob.label_tag }}
+        {{ form.dob }}
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        {{ form.age.label_tag }}
+        {{ form.age }}
+      </div>
+      <div class="form-group col-md-6">
+        {{ form.gender.label_tag }}
+        {{ form.gender }}
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        {{ form.phone_number.label_tag }}
+        {{ form.phone_number }}
+      </div>
+      <div class="form-group col-md-6">
+        {{ form.email.label_tag }}
+        {{ form.email }}
+      </div>
+    </div>
+
+    <div class="form-group">
+      {{ form.address.label_tag }}
+      {{ form.address }}
+    </div>
+
+    <!-- Academic Information Section -->
+    <div class="section-header">
+      <h3>Academic Information</h3>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+          {{ form.department.label_tag }}
+          {{ form.department }}
+        </div>
+        <div class="form-group col-md-6">
+          {{ form.course.label_tag }}
+          {{ form.course }}
+        </div>
+      </div>
+
+    <!-- Purpose and Materials Section -->
+    <div class="section-header">
+      <h3>Purpose and Materials</h3>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        {{ form.purpose.label_tag }}
+        {{ form.purpose }}
+      </div>
+    </div>
+    <div class="form-group">
+      {{ form.materials_provide.label_tag }}
+      {{ form.materials_provide }}
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+<script src="{% static 'path/to/bootstrap.bundle.min.js' %}"></script>
+<!-- Add any other scripts you need here -->
+<script src="{% static 'path/to/bootstrap.bundle.min.js' %}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var departmentDropdown = document.getElementById('id_department');
+    var courseDropdown = document.getElementById('id_course');
+
+    departmentDropdown.addEventListener('change', function() {
+        var departmentId = this.value;
+        updateCourseOptions(departmentId);
+    });
+
+    function updateCourseOptions(departmentId) {
+        var url = '/get_courses/?department_id=' + departmentId;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                courseDropdown.innerHTML = '<option value="">Select Course</option>';
+                data.forEach(course => {
+                    var option = document.createElement('option');
+                    option.value = course.id;
+                    option.text = course.name;
+                    courseDropdown.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching courses:', error);
+            });
+    }
+});
+</script>
+</body>
+</html>

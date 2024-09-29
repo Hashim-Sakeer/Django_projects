@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <header>
+        <h1 class="header_home">School Store</h1>
+    </header>
+
+    <section class="registration-section">
+        <h2>Register</h2>
+        <form action="{% url 'schoolapp:registration' %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Create your username" required><br>
+            <input type="email" name="email_address" placeholder="Enter your email address" required><br>
+            <input type="password" name="password" placeholder="Enter new password" required><br>
+            <input type="password" name="confirm_password" placeholder="Confirm your password" required><br>
+            <input type="submit" value="Register">
+        </form>
+        <a href="/login">Login</a>
+{% for msg in messages %}
+            <p style="color: red">{{ msg }}</p>
+        {% endfor %}
+    </section>
+
+    <footer>
+        <p>&copy; 2024 School Store</p>
+    </footer>
+
+{% endblock %}

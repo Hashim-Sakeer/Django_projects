@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+ <header >
+        <h1 class="header_home">School Store</h1>
+    </header>
+
+<nav>
+    <a href="/registration">Register</a>
+    <a href="/login">Login</a>
+    <div class="dropdown">
+            <button class="dropbtn">Department</button>
+            <div class="dropdown-content">
+                <a href="https://en.wikipedia.org/wiki/Computer_science">Computer Science</a>
+                <a href="https://en.wikipedia.org/wiki/Commerce">Commerce</a>
+                <a href=https://en.wikipedia.org/wiki/Science>Science</a>
+                <a href="https://en.wikipedia.org/wiki/Humanities">Humanities</a>
+                <!-- Add more departments as needed -->
+            </div>
+        </div>
+</nav>
+{% endblock %}
